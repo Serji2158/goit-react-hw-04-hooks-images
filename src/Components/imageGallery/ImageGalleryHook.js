@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 // import ImageGalleryItem from "../imageGalleryItem/ImageGalleryItem";
 import api from "../../service/API";
 import s from "./ImageGallery.module.css";
-import ImageGalleryItemHook from "../imageGalleryItem/ImageGalleryItem hook";
+import ImageGalleryItemHook from "../imageGalleryItem/ImageGalleryItemHook";
 
 const ImageGalleryHook = ({ increasePage, query, page }) => {
   const [gallery, setGallery] = useState([]);
@@ -21,25 +21,28 @@ const ImageGalleryHook = ({ increasePage, query, page }) => {
 
   useEffect(() => {
     const updateGallery = () => {
-      api
-        .fetchGallery()
-        .then(({ hits }) => {
-          setGallery((prev) => (page === 1 ? [...hits] : [...prev, ...hits]));
-          setIsHidden(true);
-        })
-        .catch((error) => setError(error))
-        .finally(() => setLoading(false));
+      if (query !== "") {
+        setLoading(true);
+        api
+          .fetchGallery(query, page)
+          .then(({ hits }) => {
+            setGallery((prev) => (page === 1 ? [...hits] : [...prev, ...hits]));
+            setIsHidden(true);
+          })
+          .catch((error) => setError(error))
+          .finally(() => setLoading(false));
+      }
     };
 
-    // if (query !== prev.query || page !== prev.page) {
-    //   setLoading(true);
-    //   updateGallery();
-    // }
+    updateGallery();
+  }, [page, query]);
 
-    // if (gallery !== prev.gallery && page !== 1) {
-    //   scroll();
-    // }
-  }, [page, query, gallery]);
+  useEffect(() => {
+    if (page !== 1) {
+      scroll();
+    }
+    // eslint-disable-next-line
+  }, [gallery]);
 
   return (
     <>

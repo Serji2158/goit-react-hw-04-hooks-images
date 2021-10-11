@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 // import Modal from "../modal/Modal";
 import s from "../imageGalleryItem/ImageGalleryItem.module.css";
-import ModalHook from "../modal/Modal hook";
+import ModalHook from "../modal/ModalHook";
 
 const ImageGalleryItemHook = ({ gallery }) => {
   const [showModal, setShowModal] = useState(false);

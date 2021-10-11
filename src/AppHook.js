@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { ToastContainer } from "react-toastify";
 // import ImageGallery from "./Components/imageGallery/ImageGallery";
 // import SearchBar from "./Components/searchBar/SearchBar";
-import ImageGalleryHook from "./Components/imageGallery/ImageGallery hook";
+import ImageGalleryHook from "./Components/imageGallery/ImageGalleryHook";
 import SearchBarHook from "./Components/searchBar/SearchBar hook";
 
 const AppHook = () => {
